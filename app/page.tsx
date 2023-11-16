@@ -1,24 +1,10 @@
-import { createClient } from '@/utils/supabase/server'
-import { cookies } from 'next/headers'
 import ProductList from "@/components/product-list";
-import Container from "@/components/ui/container";
 import BillboardSlider from "@/components/billboard-slider";
+import Image from "next/image";
+import fx45 from "@/public/fx45.png"
 
 export default async function Index() {
-  const cookieStore = cookies()
 
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient(cookieStore)
-      return true
-    } catch (e) {
-      return false
-    }
-  }
-
-  const isSupabaseConnected = canInitSupabaseClient()
 
   const products = [
     {
@@ -88,13 +74,10 @@ export default async function Index() {
   ]
 
   return (
-      <Container>
-        <div className="space-y-10 pb-10">
-          <BillboardSlider data={billboards} />
-          <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-            <ProductList title="Featured Products" products={products} />
-          </div>
-        </div>
-      </Container>
+        <section>
+          <Image src={fx45} alt={'fx45'}/>
+
+          <ProductList title="Featured Products" products={products} />
+        </section>
   )
 }
