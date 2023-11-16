@@ -9,7 +9,7 @@ interface ContainerProps extends React.BaseHTMLAttributes<HTMLBaseElement>{
 
 const Container: FC<ContainerProps> = ({className,children}) => {
     return (
-        <div className={cn(`mx-auto max-w-7xl`, className)}>
+        <div className={cn(`mx-auto max-w-7xl px-6`, className)}>
             {children}
         </div>
     );

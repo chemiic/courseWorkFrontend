@@ -91,7 +91,7 @@ export default function Login({
                 required
             />
             <label className="text-md" htmlFor="password">
-              Password
+              Пароль
             </label>
             <input
                 className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -101,13 +101,13 @@ export default function Login({
                 required
             />
             <Button>
-              Sign In
+              Войти
             </Button>
             <Button
                 formAction={signUp}
-                className="bg-transparent text-black border-2 border-black hover:border-[#9E00FF]"
+                className="bg-transparent text-black border-2 border-black hover:border-[#9E00FF] hover:text-white"
             >
-              Sign Up
+              Зарегестрироваться
             </Button>
             {searchParams?.message && (
                 <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">

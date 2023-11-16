@@ -1,7 +1,11 @@
 import ProductList from "@/components/product-list";
-import BillboardSlider from "@/components/billboard-slider";
 import Image from "next/image";
-import fx45 from "@/public/fx45.png"
+import fx49 from "@/public/fx49.png"
+import Container from "@/components/ui/container";
+import Button from "@/components/ui/button";
+import Link from "next/link";
+import MainPageMegaAnimatedImageBlock from "@/components/mainPageMegaAnimatedImageBlock";
+import HomePageGallery from "@/components/HomePageGallery";
 
 export default async function Index() {
 
@@ -60,24 +64,20 @@ export default async function Index() {
       images: ['',''],
     }
   ]
-  const billboards = [
-    {
-      id: "string",
-      label: "string",
-      imageUrl: "string",
-    },
-    {
-      id: "string",
-      label: "string",
-      imageUrl: "string",
-    }
-  ]
 
   return (
         <section>
-          <Image src={fx45} alt={'fx45'}/>
-
-          <ProductList title="Featured Products" products={products} />
+          <Image src={fx49} alt={'fx49'}/>
+          <Container>
+            <div className="py-10">
+              <MainPageMegaAnimatedImageBlock/>
+              <ProductList title="Модели" products={products} />
+              <Link href="/catalog" className="mx-auto block w-fit mt-6">
+                <Button className="px-10">Смотреть все</Button>
+              </Link>
+              <HomePageGallery/>
+            </div>
+          </Container>
         </section>
   )
 }
