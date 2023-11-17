@@ -24,7 +24,7 @@ const mainPageMegaAnimatedImageBlock = () => {
                  ref={containerRef} >
             <div className={`md:max-w-[32vw] flex-col flex items-center justify-center md:items-start`}>
                 <h2 className={`text-3xl font-bold`}>О нас<span className={`mx-auto md:mx-0 block w-10 bg-[--lightPurple] h-1 my-3`}></span></h2>
-                <p className={`font-semibold text-neutral-600 mb-5`}>
+                <p className={`font-semibold text-neutral-600 mb-5 text-center md:text-left`}>
                     Мы производитель компактных корпусов для мини-ПК.
                 </p>
                 <p className={`text-neutral-500 text-center md:text-left`}>

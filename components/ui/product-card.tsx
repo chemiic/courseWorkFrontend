@@ -34,14 +34,14 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
     const handleClick = (): void => {
         router.push(`/product/${product.id}`);
     };
-
     return (
         <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
             <div className="aspect-square rounded-xl bg-gray-100 relative">
                 <Image
-                    src={product?.images?.[0]?.url}
+                    src={product.image_path}
                     alt="Image"
                     fill
+                    sizes={"(max-width: 768px) 300px, (max-width: 1200px) 300px, 300px"}
                     className="aspect-square object-cover rounded-md"
                 />
                 <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
@@ -62,7 +62,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
                     {product.name}
                 </p>
                 <p className="text-sm text-gray-500">
-                    {product.category.name}
+                    {product.category}
                 </p>
             </div>
             <div className="flex items-center justify-between">

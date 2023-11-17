@@ -34,7 +34,7 @@ const HomePageGallery = () => {
     return (
         <Container className="py-10 flex flex-col md:flex-row gap-6 items-center justify-center text-center md:text-left">
             <motion.div
-                className={`flex flex-col gap-3 justify-center sm:max-w-[30vw]`}
+                className={`flex flex-col gap-3 justify-center md:max-w-[30vw]`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0, }}
                 viewport={{ once: true }}
@@ -53,10 +53,9 @@ const HomePageGallery = () => {
                 modules={[EffectCards]}
                 className="max-w-[300px] h-[300px] lg:max-w-[400px] lg:h-[400px]"
             >
-                    {slides.map(item=>(
-                        <SwiperSlide className={`flex flex-col items-center justify-center rounded-xl bg-neutral-100 border-b`}>
-                            <Image src={case1} alt="PC-case-img"/>
-                            {item.text}
+                    {slides.map((item,index)=>(
+                        <SwiperSlide key={index} className={`!flex flex-col items-center justify-center rounded-xl bg-neutral-100 border-b`}>
+                            <Image src={case1} alt="PC-case-img" className={``}/>
                         </SwiperSlide>
                     ))}
             </Swiper>

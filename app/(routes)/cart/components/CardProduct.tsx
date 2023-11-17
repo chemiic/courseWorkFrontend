@@ -26,7 +26,7 @@ const CardProduct: FC<CardProductProps> = ({product}) => {
             <div className="relative h-24 w-24 rounded-md overflow-hidden sm:h-48 sm:w-48">
                 <Image
                     onClick={() => router.push(`/product/${product.id}`)}
-                    src={product.images[0].url}
+                    src={product.image_path}
                     alt="Image"
                     fill
                     className="object-cover object-center cursor-pointer" />
@@ -43,15 +43,15 @@ const CardProduct: FC<CardProductProps> = ({product}) => {
                     </div>
                     <div className="mt-1 flex gap-x-3 text-sm">
                         <p className="text-gray-500">
-                            {product.color.name}
+                            {product.color}
                         </p>
                         <p className="text-gray-500 ,l-4 border-l border-gray-200 pl-4">
-                            {product.size.name}
+                            {product.form_factor}
+                        </p>
+                        <p className="text-gray-500 ,l-4 border-l border-gray-200 pl-4">
+                            {product.category}
                         </p>
                     </div>
-                    <p onClick={() => router.push(`/category/${product.category.id}`)} className="text-gray-500 cursor-pointer">
-                        {product.category.name}
-                    </p>
                     <Currency value={product.price} />
                 </div>
             </div>

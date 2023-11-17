@@ -1,16 +1,19 @@
-import {Product} from "@/types";
+import {cookies} from "next/headers";
+import {createClient} from "@/utils/supabase/server";
+const getProducts = async () => {
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
 
-const URL: string = `${process.env.NEXT_PUBLIC_API_URL}/products`;
+    let { data:products, error } = await supabase
+        .from('products')
+        .select('*')
+        .range(0, 100);
 
-interface Query {
-    categoryId?: string;
-    colorId?: string;
-    sizeId?: string;
-    isFeatured?: boolean;
-}
-
-const getProducts = async (query: Query): Promise<Product[]> => {
-    return [{}]
+    if (error){
+        console.log(error)
+    }
+    console.log(products)
+    return products as any || [];
 };
 
 export default getProducts;
