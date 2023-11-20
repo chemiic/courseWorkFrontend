@@ -12,7 +12,6 @@ const getProducts = async () => {
     if (error){
         console.log(error)
     }
-    console.log(products)
     return products as any || [];
 };
 

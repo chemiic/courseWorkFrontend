@@ -18,19 +18,19 @@ const useCart = create(
             const existingProduct = currentProducts.find(item => item.id === product.id);
 
             if (existingProduct) {
-                return toast("Product already in cart!");
+                return toast("Товар уже в корзине!");
             }
 
             set({ products: [...get().products, product] });
-            toast.success("Product added to cart.");
+            toast.success("Товар добавлен в корзину.");
         },
         removeProduct: (id: string): void => {
             set({ products: [...get().products.filter(item => item.id !== id)] });
-            toast.success("Product removed from the cart.");
+            toast.success("Товар удален из корзины.");
         },
         removeAll: (): void => {
             set({ products: [] });
-            toast.success("All product removed from the cart.");
+            toast.success("Все товары удалены из корзины.");
         },
     }), {
         name: "cart-storage",

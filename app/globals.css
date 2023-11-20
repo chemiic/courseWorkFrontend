@@ -10,6 +10,8 @@
     --foreground: 200 50% 3%;
     --purple: #9E00FF;
     --lightPurple: #C403EA;
+    --swiper-pagination-color: #C403EA;
+    --swiper-navigation-color: #C403EA;
   }
 
   @media (prefers-color-scheme: dark) {

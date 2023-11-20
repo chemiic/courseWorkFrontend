@@ -6,6 +6,7 @@ import Container from "@/components/ui/container";
 import ProductList from "@/components/product-list";
 import Gallery from "@/components/gallery/gallery";
 import Info from "@/components/info";
+import getProductsForBanner from "@/actions/getProductsForBanner";
 
 interface ProductIdPageProps {
     params: {
@@ -16,7 +17,7 @@ interface ProductIdPageProps {
 
 const ProductIdPage: NextPage<ProductIdPageProps> = async ({params}) => {
     const product: Product = await getProduct(params.productId);
-    const suggestedProduct: Product[] = await getProducts({categoryId: product.category.id});
+    const suggestedProduct = await getProductsForBanner()
 
     return (
         <div className="bg-white">
@@ -27,7 +28,7 @@ const ProductIdPage: NextPage<ProductIdPageProps> = async ({params}) => {
                         <Info product={product} />
                     </div>
                     <hr className="my=10" />
-                    <ProductList title="Related Items" products={suggestedProduct} />
+                    <ProductList title="Похожее" products={suggestedProduct} />
                 </div>
             </Container>
         </div>

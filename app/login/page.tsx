@@ -59,7 +59,7 @@ export default function Login({
   return (
       <Container>
         <div className="flex flex-col justify-between max-w-[100%] w-[100vw] py-10 px-6 gap-4 h-full">
-          <Link href="/">
+          <Link href="/" className={`w-fit`}>
             <Button className={`w-[150px] flex items-center rounded-0 relative justify-center group`}>
               <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ export default function Login({
               >
                 <polyline points="15 18 9 12 15 6" />
               </svg>{' '}
-              Back
+              Назад
             </Button>
           </Link>
 

@@ -6,11 +6,11 @@ import Button from "@/components/ui/button";
 import Link from "next/link";
 import MainPageMegaAnimatedImageBlock from "@/components/mainPageMegaAnimatedImageBlock";
 import HomePageGallery from "@/components/HomePageGallery";
-import getProducts from "@/actions/getProducts";
+import getProductsForBanner from "@/actions/getProductsForBanner";
 
 export default async function Index() {
 
-  const products = await getProducts()
+  const products = await getProductsForBanner()
     return (
         <section>
           <Image src={fx49} alt={'fx49'}/>

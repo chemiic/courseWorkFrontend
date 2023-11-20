@@ -10,6 +10,7 @@ import Currency from "@/components/ui/currency";
 import {useRouter} from "next/navigation";
 import usePreviewModal from "@/hooks/use-preview-modal";
 import useCart from "@/hooks/use-cart";
+import { motion } from 'framer-motion';
 
 interface ProductCardProps {
     product: Product;
@@ -35,7 +36,17 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
         router.push(`/product/${product.id}`);
     };
     return (
-        <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
+        <motion.div
+            onClick={handleClick}
+            className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0, }}
+            viewport={{ once: true }}
+            transition={{
+                type: "spring",
+                duration: 2
+            }}
+        >
             <div className="aspect-square rounded-xl bg-gray-100 relative">
                 <Image
                     src={product.image_path}
@@ -68,7 +79,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
             <div className="flex items-center justify-between">
                 <Currency value={product.price} />
             </div>
-        </div>
+        </motion.div>
     );
 };
 

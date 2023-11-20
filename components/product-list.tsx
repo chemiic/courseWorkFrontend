@@ -10,7 +10,7 @@ interface ProductListProps{
 
 const ProductList: FC<ProductListProps> = ({title, products}) => {
     return (
-        <div className="space-y-10 py-2">
+        <div className="space-y-10 py-2 min-h-[420px]">
             {title &&
             <h3 className="font-bold text-3xl text-center">{title}</h3>
             }

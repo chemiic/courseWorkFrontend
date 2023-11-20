@@ -28,7 +28,7 @@ const CartPage: NextPage = () => {
                     <h1 className="text-3xl font-bold">Корзина</h1>
                     <div className="mt-12 lg:grid-cols-12 lg:items-start gap-x-12">
                         <div className="lg6:col-span-7">
-                            {cart.products.length === 0 && <p className="text-neutral-500">No products added to cart, go <Link href={"/"}>back</Link></p>}
+                            {cart.products.length === 0 && <p className="text-neutral-500 text-center py-10">Корзина пуста</p>}
                             <ul className="">
                                 {cart.products.map(product => (
                                     <CardProduct key={product.id} product={product} />

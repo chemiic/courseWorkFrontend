@@ -19,11 +19,12 @@ const Gallery = (images: { images: any; }) => {
                 </Tab.List>
             </div>
             <Tab.Panels className="aspect-square w-full">
+
                 {imageArr.map((image: string | StaticImport, index: Key | null | undefined) => (
                     <Tab.Panel key={index}>
                         <div className="aspect-square relative h-full w-full sm:rounded-lg overflow-hidden">
                             <Image fill
-                                   sizes={"(max-width: 768px) 300px, (max-width: 1200px) 300px, 300px"}
+                                   sizes={"(max-width: 768px) 600px, (max-width: 1200px) 600px, 600px"}
                                    src={image}
                                    alt="Image"
                                    className="object-cover object-center" />
