@@ -7,7 +7,7 @@ import CatalogPagination from "@/app/(routes)/catalog/components/catalogPaginati
 import {Select, Option, Input} from "@material-tailwind/react";
 import Button from "@/components/ui/button";
 import { motion } from "framer-motion";
-import catalogPagination from "@/app/(routes)/catalog/components/catalogPagination";
+
 interface CatalogProps{
     products: Product[];
 }
@@ -29,36 +29,87 @@ const Catalog: FC<CatalogProps> = ({products}) => {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
+        let newArr: any[] = []
         if (formFactor !== ''){
-            setFilteredProducts(products.filter(item=>{
-                if(item.form_factor === formFactor){
-                    return item
-                }
-            }))
-        } else if (color !=='' ){
-            setFilteredProducts(products.filter(item=>{
-                if(item.color === color){
-                    return item
-                }
-            }))
-        } else if (priceFrom !=='' && priceTo !==''){
-            setFilteredProducts(products.filter(item=>{
-                if(item.price > Number(priceFrom) && item.price < Number(priceTo)){
-                    return item
-                }
-            }))
-        } else if (priceFrom !==''){
-            setFilteredProducts(products.filter(item=>{
-                if(item.price > Number(priceFrom)){
-                    return item
-                }
-            }))
-        } else if (priceTo !==''){
-            setFilteredProducts(products.filter(item=>{
-                if(item.price < Number(priceTo)){
-                    return item
-                }
-            }))
+            if (newArr.length!==0){
+
+                newArr = newArr.flat(1).filter(item=>{
+                    if(item.form_factor === formFactor){
+                        return item
+                    }
+                })
+            } else {
+                newArr.push(products.filter(item=>{
+                    if(item.form_factor === formFactor){
+                        return item
+                    }
+                }))
+            }
+        } if (color !=='' ){
+            if (newArr.length!==0){
+
+                newArr = newArr.flat(1).filter(item=>{
+                    if(item.color === color){
+                        return item
+                    }
+                })
+            } else {
+                newArr.push(products.filter(item=>{
+                    if(item.color === color){
+                        return item
+                    }
+                }))
+            }
+        } if (priceFrom !=='' && priceTo !==''){
+            if (newArr.length!==0){
+
+                newArr = newArr.flat(1).filter(item=>{
+                    if((item.price > Number(priceFrom) || item.price == Number(priceFrom)) &&
+                        (item.price < Number(priceTo) || item.price == Number(priceTo))){
+                        return item
+                    }
+                })
+            } else {
+                newArr.push(products.filter(item=>{
+                    if((item.price > Number(priceFrom) || item.price == Number(priceFrom)) &&
+                        (item.price < Number(priceTo) || item.price == Number(priceTo))){
+                        return item
+                    }
+                }))
+            }
+        } if (priceFrom !=='' && priceTo ===''){
+            if (newArr.length!==0){
+                console.log(newArr)
+                newArr = newArr.flat(1).filter(item=>{
+                    if(item.price > Number(priceFrom) || item.price == Number(priceFrom)){
+                        return item
+                    }
+                })
+            } else {
+                newArr.push(products.filter(item=>{
+                    if(item.price > Number(priceFrom) || item.price == Number(priceFrom)){
+                        return item
+                    }
+                }))
+            }
+        } if (priceTo !=='' && priceFrom === ''){
+            if (newArr.length!==0){
+                newArr = newArr.flat(1).filter(item=>{
+                    if(item.price < Number(priceTo) || item.price == Number(priceTo)){
+                        return item
+                    }
+                })
+            } else {
+                newArr.push(products.filter(item=>{
+                    if(item.price < Number(priceTo) || item.price == Number(priceTo)){
+                        return item
+                    }
+                }))
+            }
+        }
+        if (newArr.length !== 0) {
+            // @ts-ignore
+            setFilteredProducts(newArr.flat(1))
         } else {
             setFilteredProducts(products)
         }
@@ -72,8 +123,8 @@ const Catalog: FC<CatalogProps> = ({products}) => {
     }
     return (
         <>
-        <motion.form className={`pt-6 pb-10 flex gap-6 items-center`}
-                     onSubmit={handleSubmit}
+        <motion.form className={`pt-6 pb-10 flex flex-wrap justify-center gap-6 items-center`}
+             onSubmit={handleSubmit}
              initial={{ opacity: 0, y: 10 }}
              whileInView={{ opacity: 1, y: 0, }}
              viewport={{ once: true }}

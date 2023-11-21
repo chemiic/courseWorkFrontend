@@ -29,7 +29,7 @@ const  CatalogPage:NextPage = async () => {
                 </Button>
             </Link>
             <h1 className={`text-3xl mt-6 font-bold`}>Каталог</h1>
-            <div className={`py-6 w-[100vw] max-w-full`}>
+            <div className={`py-6 w-[95vw] max-w-full`}>
                 <Catalog products={products}/>
             </div>
         </Container>
