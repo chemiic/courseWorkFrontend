@@ -1,6 +1,5 @@
 import {NextPage} from "next";
 import getProduct from "@/actions/getProduct";
-import getProducts from "@/actions/getProducts";
 import {Product} from "@/types/types";
 import Container from "@/components/ui/container";
 import ProductList from "@/components/product-list";

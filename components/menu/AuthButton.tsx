@@ -1,33 +1,30 @@
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import Button from "@/components/ui/button";
-import {FaUser, FaUserAltSlash} from "react-icons/fa";
+import {FaUser} from "react-icons/fa";
+import {redirect} from 'next/navigation'
 
 export default async function AuthButton() {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
-
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const signOut = async () => {
+  const toProfile = async () => {
     'use server'
-
     const cookieStore = cookies()
     const supabase = createClient(cookieStore)
-    await supabase.auth.signOut()
-    return redirect('/')
+    const profileId = await supabase.auth.getUser()
+    return redirect(`/profile/${profileId.data.user?.id}`)
   }
 
   return user ? (
     <div className="flex items-center gap-4">
-      <form action={signOut}>
+      <form action={toProfile}>
         <Button className="flex items-center sm:gap-2 text-[0px] sm:text-sm">
           {user.email}
-          <FaUserAltSlash className={`text-sm`}/>
         </Button>
       </form>
     </div>

@@ -1,8 +1,4 @@
-import {type FC, useEffect, useState} from 'react';
-import Button from "@/components/ui/button";
-import {FaShoppingCart, FaUser} from "react-icons/fa";
-import useCart from "@/hooks/use-cart";
-import {useRouter} from "next/navigation";
+import {type FC} from 'react';
 import CartButton from "@/components/menu/CartButton";
 import AuthButton from "@/components/menu/AuthButton";
 

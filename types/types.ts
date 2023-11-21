@@ -9,3 +9,9 @@ export interface Product {
     image_path: string;
     images: [];
 }
+export interface ProfileData {
+    first_name: string;
+    last_name: string;
+    patronymic: string;
+    address: string;
+}
