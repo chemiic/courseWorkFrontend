@@ -22,12 +22,13 @@ const CardProduct: FC<CardProductProps> = ({product}) => {
     };
 
     return (
-        <li className="flex py-6 border-b">
-            <div className="relative h-24 w-24 rounded-md overflow-hidden sm:h-48 sm:w-48">
+        <li className="flex py-6 border-b sm:flex-row flex-col gap-6 sm:gap-0">
+            <div className="relative mx-auto h-[280px] w-[280px] rounded-md overflow-hidden sm:mx-0 sm:h-48 sm:w-48">
                 <Image
                     onClick={() => router.push(`/product/${product.id}`)}
                     src={product.image_path}
                     alt="Image"
+                    sizes={"(max-width: 768px) 300px, (max-width: 1200px) 300px, 300px"}
                     fill
                     className="object-cover object-center cursor-pointer" />
             </div>

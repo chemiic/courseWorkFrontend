@@ -1,8 +1,7 @@
 "use client";
 
-import axios from "axios";
 import {FC, useEffect} from "react";
-import { useSearchParams } from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
@@ -13,7 +12,7 @@ const Summary: FC = () => {
     const searchParams = useSearchParams();
     const products = useCart((state) => state.products);
     const removeAll = useCart((state) => state.removeAll);
-
+    const router = useRouter()
     useEffect((): void => {
         if (searchParams.get('success')) {
             toast.success('Payment completed.');
@@ -30,11 +29,7 @@ const Summary: FC = () => {
     }, 0);
 
     const onCheckout = async () => {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
-            productIds: products.map((product) => product.id)
-        });
-
-        window.location = response.data.url;
+        router.push('/checkout')
     }
 
     return (

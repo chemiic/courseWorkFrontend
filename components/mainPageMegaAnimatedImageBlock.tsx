@@ -12,7 +12,7 @@ import Link from "next/link";
 const mainPageMegaAnimatedImageBlock = () => {
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll();
-    const imageValue = useTransform(scrollYProgress, [0, 1], [-25, 5])
+    const imageValue = useTransform(scrollYProgress, [0, 1], [-35, 15])
     const aboutFrontAnim = useSpring(imageValue, {
         stiffness: 100,
         damping: 30,

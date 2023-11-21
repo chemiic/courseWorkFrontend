@@ -39,12 +39,18 @@ export default function Login({
     const cookieStore = cookies()
     const supabase = createClient(cookieStore)
 
+    // data:{
+    //   first_name:  'first_nameInput',
+    //   last_name:  'last_nameInput',
+    //   patronymic:  'patronymicInput',
+    //   address:  'addressInput'
+    // }
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: `${origin}/auth/callback`,
-      },
+      }
     })
 
     if (error) {

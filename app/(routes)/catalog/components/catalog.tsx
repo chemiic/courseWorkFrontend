@@ -123,7 +123,7 @@ const Catalog: FC<CatalogProps> = ({products}) => {
     }
     return (
         <>
-        <motion.form className={`pt-6 pb-10 flex flex-wrap justify-center gap-6 items-center`}
+        <motion.form className={`pt-6 pb-10 flex flex-wrap 2xl:flex-nowrap justify-center gap-6 items-center`}
              onSubmit={handleSubmit}
              initial={{ opacity: 0, y: 10 }}
              whileInView={{ opacity: 1, y: 0, }}
@@ -154,12 +154,13 @@ const Catalog: FC<CatalogProps> = ({products}) => {
                 <Option value={"Фиолетовый"}>Фиолетовый</Option>
                 <Option value={"Белый"}>Белый</Option>
             </Select>
-            <div className={`flex gap-3`}>
+            <div className={`flex gap-3 sm:flex-row flex-col w-full`}>
                 <Input
                     className="rounded-md px-4 py-2 bg-inherit border mb-6"
                     label={"Цена от"}
                     value={priceFrom}
                     onChange={e=>setPriceFrom(e.target.value)}
+
                 />
                 <Input
                     className="rounded-md px-4 py-2 bg-inherit border mb-6"

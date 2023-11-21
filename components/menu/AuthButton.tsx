@@ -24,6 +24,7 @@ export default async function AuthButton() {
     <div className="flex items-center gap-4">
       <form action={toProfile}>
         <Button className="flex items-center sm:gap-2 text-[0px] sm:text-sm">
+          <FaUser className={`text-white text-sm`}/>
           {user.email}
         </Button>
       </form>
