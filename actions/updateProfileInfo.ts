@@ -1,6 +1,4 @@
-
 import {ProfileData} from "@/types/types";
-import toast from "react-hot-toast";
 import {cookies} from "next/headers";
 import {createClient} from "@/utils/supabase/server";
 const updateProfileInfo = async (profileData:ProfileData) => {
@@ -18,9 +16,8 @@ const updateProfileInfo = async (profileData:ProfileData) => {
         .eq('id', `${user.data.user?.id}`)
 
     if (error){
-         toast.error("Ошибка.")
+        console.log("Ошибка.")
     }
-     toast.success("Профиль изменен.")
 };
 
 export default updateProfileInfo;
