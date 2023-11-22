@@ -6,7 +6,10 @@ import 'swiper/css/effect-cards';
 import 'swiper/css/pagination';
 
 import Image from "next/image";
-import case1 from "@/public/CaseImg1.jpg"
+import case1_1 from '@/public/case1_1.jpg'
+import case1_2 from '@/public/case1_2.jpg'
+import case1_3 from '@/public/case1_3.jpg'
+import case1_4 from '@/public/case1_4.jpg'
 
 // import required modules
 import {EffectCards, Keyboard, Navigation, Pagination} from 'swiper/modules';
@@ -14,20 +17,28 @@ import Container from "@/components/ui/container";
 
 const slidesInner = [
     {
-        text: 'slide1',
-        img: 'string'
+        images: [case1_1, case1_2, case1_3, case1_4],
+        text: {
+            MB: 'ASUS ROG Strix B760-i Gaming',
+            CPU: 'INTEL CORE i5-13500',
+            GPU: 'INNO3D RTX 4070ti 12Gb',
+            PSU: 'Corsair SF600 pl',
+            RAM: 'G.SKILL DDR5-6000 FlareX5 32Gb',
+            Cooler:' NOCTUA NH-L9i-17xx',
+            NVME:' M.2 Kingston NV2 1Tb',
+        }
     },
     {
-        text: 'slide2',
-        img: 'string'
-    },
-    {
-        text: 'slide3',
-        img: 'string'
-    },
-    {
-        text: 'slide4',
-        img: 'string'
+        images: [case1_1, case1_2, case1_3, case1_4],
+        text: {
+            MB: 'ASUS ROG Strix B760-i Gaming',
+            CPU: 'INTEL CORE i5-13500',
+            GPU: 'INNO3D RTX 4070ti 12Gb',
+            PSU: 'Corsair SF600 pl',
+            RAM: 'G.SKILL DDR5-6000 FlareX5 32Gb',
+            Cooler:' NOCTUA NH-L9i-17xx',
+            NVME:' M.2 Kingston NV2 1Tb',
+        }
     },
 ]
 const HomePageGallery = () => {
@@ -47,64 +58,55 @@ const HomePageGallery = () => {
                 modules={[Keyboard, Pagination]}
                 className="mySwiper"
             >
-                <SwiperSlide>
-                    <div className={`flex flex-col md:flex-row gap-6 items-center justify-center text-center md:text-left`}>
-                        <motion.div
-                            className={`flex flex-col gap-3 justify-center md:max-w-[30vw]`}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0, }}
-                            viewport={{ once: true }}
-                            transition={{
-                                type: "spring",
-                                duration: 2
-                            }}>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae consectetur consequuntur
-                            debitis, deserunt dolorem doloremque ea eligendi inventore ipsum laboriosam molestiae
-                            mollitia nihil officia optio praesentium quam, vitae voluptas.
-                        </motion.div>
-                        <Swiper
-                            effect={'cards'}
-                            grabCursor={true}
-                            modules={[EffectCards]}
-                            className="max-w-[260px] h-[260px] lg:max-w-[400px] lg:h-[400px]"
-                        >
-                            {slidesInner.map((item,index)=>(
-                                <SwiperSlide key={index} className={`!flex flex-col items-center justify-center rounded-xl bg-white border-b`}>
-                                    <Image src={case1} alt="PC-case-img" className={``}/>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className={`flex py-10 flex-col md:flex-row gap-6 items-center justify-center text-center md:text-left`}>
-                        <motion.div
-                            className={`flex flex-col gap-3 justify-center md:max-w-[30vw]`}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0, }}
-                            viewport={{ once: true }}
-                            transition={{
-                                type: "spring",
-                                duration: 2
-                            }}>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae consectetur consequuntur
-                            debitis, deserunt dolorem doloremque ea eligendi inventore ipsum laboriosam molestiae
-                            mollitia nihil officia optio praesentium quam, vitae voluptas.
-                        </motion.div>
-                        <Swiper
-                            effect={'cards'}
-                            grabCursor={true}
-                            modules={[EffectCards]}
-                            className="max-w-[260px] h-[260px] lg:max-w-[400px] lg:h-[400px]"
-                        >
-                            {slidesInner.map((item,index)=>(
-                                <SwiperSlide key={index} className={`!flex flex-col items-center justify-center rounded-xl bg-white border-b`}>
-                                    <Image src={case1} alt="PC-case-img" className={``}/>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </div>
-                </SwiperSlide>
+                {slidesInner.map((item,index)=>(
+                    <SwiperSlide key={index}>
+                        <div className={`flex flex-col xl:flex-row gap-6 items-center justify-center text-center xl:text-left py-10`}>
+                            <motion.div
+                                className={`flex flex-col gap-3 justify-center w-full xl:ml-6 xl:max-w-[25vw] font-medium`}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0, }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    type: "spring",
+                                    duration: 2
+                                }}>
+                                <div>MB:
+                                    {item.text.MB}
+                                </div>
+                                <div>CPU:
+                                    {item.text.CPU}
+                                </div>
+                                <div>GPU:
+                                    {item.text.GPU}
+                                </div>
+                                <div>PSU:
+                                    {item.text.PSU}
+                                </div>
+                                <div>RAM:
+                                    {item.text.RAM}
+                                </div>
+                                <div>Cooler:
+                                    {item.text.Cooler}
+                                </div>
+                                <div>NVME:
+                                    {item.text.NVME}
+                                </div>
+                            </motion.div>
+                            <Swiper
+                                effect={'cards'}
+                                grabCursor={true}
+                                modules={[EffectCards]}
+                                className="max-w-[260px] h-[260px] lg:max-w-[350px] lg:h-[350px] !mx-0"
+                            >
+                                {item.images.map((item,index)=>(
+                                    <SwiperSlide key={index} className={`!flex flex-col items-center justify-center rounded-xl bg-white border-b`}>
+                                        <Image src={item} alt="PC-case-img" className={``}/>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        </div>
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </Container>
     );
