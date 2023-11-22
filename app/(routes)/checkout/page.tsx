@@ -50,7 +50,7 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = async ({params}) => {
                         <div><span>Имя: </span>{profileData.first_name}</div>
                         <div><span>Фамилия: </span>{profileData.last_name}</div>
                         <div><span>Отчество: </span>{profileData.patronymic}</div>
-                        <div className"border-b border-gray-200 pb-4"><span>Адрес: </span>{profileData.address}</div>
+                        <div><span>Адрес: </span>{profileData.address}</div>
                         <Link href={`/profileEdit/${profileEditId.data.user?.id}`} className={`w-fit`}>
                             <Button className={`flex justify-center items-center gap-2 text-sm`}>
                                 Редактировать
