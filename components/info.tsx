@@ -23,7 +23,7 @@ const Info: FC<InfoProps> = ({product}) => {
     };
 
     return (
-        <div className="">
+        <div className="mt-6 lg:mt-0">
             <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
             <div className="mt-3 flex items-end justify-between text-2xl text-gray-900">
                 <Currency value={product.price} />

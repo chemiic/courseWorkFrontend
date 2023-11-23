@@ -23,15 +23,15 @@ export default async function AuthButton() {
   return user ? (
     <div className="flex items-center gap-4">
       <form action={toProfile}>
-        <Button className="flex items-center sm:gap-2 text-[0px] sm:text-sm">
-          <FaUser className={`text-white text-sm`}/>
+        <Button className="flex items-center sm:gap-2 text-[0px] sm:text-sm px-4 py-2 sm:px-5 sm:py-2.5">
+          <FaUser className={`text-white text-sm `}/>
           {user.email}
         </Button>
       </form>
     </div>
   ) : (
     <Link href="/login">
-      <Button>
+      <Button className={`px-4 py-2 sm:px-5 sm:py-2.5`}>
         <FaUser/>
       </Button>
     </Link>

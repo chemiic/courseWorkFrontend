@@ -21,7 +21,7 @@ const CartButton: FC = () => {
     }
 
     return (
-        <Button className="flex items-center rounded-full bg-black px-4 py-2" onClick={() => router.push("/cart")}>
+        <Button className="flex items-center rounded-full bg-black px-3 py-1.5 sm:px-4 sm:py-2" onClick={() => router.push("/cart")}>
             <FaShoppingCart size={20} className="text-white"/>
             <span className="ml-2 text-sm font-medium text-white">{cart.products.length > 9? "9+" : cart.products.length}</span>
         </Button>

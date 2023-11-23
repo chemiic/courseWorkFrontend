@@ -70,26 +70,26 @@ const HomePageGallery = () => {
                                     type: "spring",
                                     duration: 2
                                 }}>
-                                <div>MB:
-                                    {item.text.MB}
+                                <div>Материнская плата:
+                                    {" " + item.text.MB}
                                 </div>
-                                <div>CPU:
-                                    {item.text.CPU}
+                                <div>Процессор:
+                                    {" " + item.text.CPU}
                                 </div>
-                                <div>GPU:
-                                    {item.text.GPU}
+                                <div>Видеокарта:
+                                    {" " + item.text.GPU}
                                 </div>
-                                <div>PSU:
-                                    {item.text.PSU}
+                                <div>Блок питания:
+                                    {" " + item.text.PSU}
                                 </div>
-                                <div>RAM:
-                                    {item.text.RAM}
+                                <div>Оперативная память:
+                                    {" " + item.text.RAM}
                                 </div>
-                                <div>Cooler:
-                                    {item.text.Cooler}
+                                <div>Охлаждение процессора:
+                                    {" " + item.text.Cooler}
                                 </div>
-                                <div>NVME:
-                                    {item.text.NVME}
+                                <div>Хранение данных:
+                                    {" " + item.text.NVME}
                                 </div>
                             </motion.div>
                             <Swiper
