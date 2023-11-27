@@ -7,7 +7,7 @@ import {FaEdit} from "react-icons/fa";
 import {cookies} from "next/headers";
 import {createClient} from "@/utils/supabase/server";
 import TotalPrice from "@/components/totalPrice";
-import {redirect} from "next/navigation";
+import {redirect, useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import {useSupabaseClient, useUser} from "@supabase/auth-helpers-react";
 import {toast} from "react-hot-toast";
@@ -20,6 +20,7 @@ interface CheckoutPageProps {
 }
 
 const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
+    const router = useRouter()
     const supabaseClient = useSupabaseClient();
     const [profileData,setProfileData] = useState({
         first_name: '',
@@ -39,10 +40,11 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
         if (user){
             setIsAuth(true)
         }
-    }, []);
-    const toProfile = async () => {
+    }, [user]);
+    const toProfile = async (e:any) => {
+        e.preventDefault()
         const profileId = await supabaseClient.auth.getUser()
-        return redirect(`/profile/${profileId.data.user?.id}`)
+        return router.push(`/profile/${profileId.data.user?.id}`)
     }
     const doCheckout = async () => {
         const userId = await supabaseClient.auth.getUser()
