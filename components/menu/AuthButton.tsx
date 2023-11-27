@@ -1,22 +1,15 @@
-import { createClient } from '@/utils/supabase/server'
+'use client'
 import Link from 'next/link'
-import { cookies } from 'next/headers'
 import Button from "@/components/ui/button";
 import {FaUser} from "react-icons/fa";
 import {redirect} from 'next/navigation'
+import {useSupabaseClient, useUser} from "@supabase/auth-helpers-react";
 
-export default async function AuthButton() {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
+const  AuthButton =  () => {
+  const supabaseClient = useSupabaseClient();
+  const user  = useUser()
   const toProfile = async () => {
-    'use server'
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
-    const profileId = await supabase.auth.getUser()
+    const profileId = await supabaseClient.auth.getUser()
     return redirect(`/profile/${profileId.data.user?.id}`)
   }
 
@@ -37,3 +30,4 @@ export default async function AuthButton() {
     </Link>
   )
 }
+export default AuthButton;

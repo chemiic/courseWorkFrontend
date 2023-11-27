@@ -1,63 +1,56 @@
+'use client'
 import Link from 'next/link'
-import { headers, cookies } from 'next/headers'
-import { createClient } from '@/utils/supabase/server'
-import { redirect } from 'next/navigation'
 import Button from "@/components/ui/button";
 import Container from "@/components/ui/container";
+import {useSupabaseClient} from "@supabase/auth-helpers-react";
+import {useRouter} from "next/navigation";
+import {Input} from "@material-tailwind/react";
+import {useState} from "react";
 
-export default function Login({
-  searchParams,
-}: {
-  searchParams: { message: string }
-}) {
+
+export default function Login() {
+  const router = useRouter()
+  const supabaseClient = useSupabaseClient();
+  const [resultMessage, setResultMessage] = useState('')
   const signIn = async (formData: FormData) => {
-    'use server'
-
     const email = formData.get('email') as string
     const password = formData.get('password') as string
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabaseClient.auth.signInWithPassword({
       email,
       password,
     })
 
     if (error) {
-      return redirect('/login?message=Could not authenticate user')
+      setResultMessage(`Ошибка`)
     }
 
-    return redirect('/')
+    return router.push('/')
   }
 
   const signUp = async (formData: FormData) => {
-    'use server'
-
-    const origin = headers().get('origin')
     const email = formData.get('email') as string
     const password = formData.get('password') as string
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
 
-    // data:{
-    //   first_name:  'first_nameInput',
-    //   last_name:  'last_nameInput',
-    //   patronymic:  'patronymicInput',
-    //   address:  'addressInput'
-    // }
-    const { error } = await supabase.auth.signUp({
+    const { error } = await supabaseClient.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${origin}/auth/callback`,
+        emailRedirectTo: `${location.origin}/auth/callback`,
+        data:{
+          first_name:  'first_nameInput',
+          last_name:  'last_nameInput',
+          patronymic:  'patronymicInput',
+          address:  'addressInput'
+        }
       }
     })
 
     if (error) {
-      return redirect('/login?message=Could not authenticate user')
+       setResultMessage(`Ошибка`)
     }
 
-    return redirect('/login?message=Check email to continue sign in process')
+    setResultMessage('Подтвердите Email для продолжения')
   }
 
 
@@ -91,20 +84,20 @@ export default function Login({
             <label className="text-md" htmlFor="email">
               Email
             </label>
-            <input
+            <Input
                 className="rounded-md px-4 py-2 bg-inherit border mb-6"
                 name="email"
-                placeholder="you@example.com"
+                label="you@example.com"
                 required
             />
             <label className="text-md" htmlFor="password">
               Пароль
             </label>
-            <input
+            <Input
                 className="rounded-md px-4 py-2 bg-inherit border mb-6"
                 type="password"
                 name="password"
-                placeholder="••••••••"
+                label="••••••••"
                 required
             />
             <Button>
@@ -116,9 +109,9 @@ export default function Login({
             >
               Зарегестрироваться
             </Button>
-            {searchParams?.message && (
+            {resultMessage && (
                 <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-                  {searchParams.message}
+                  {resultMessage}
                 </p>
             )}
           </form>

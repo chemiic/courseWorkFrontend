@@ -1,6 +1,6 @@
+'use client'
 import {NextPage} from "next";
 import Container from "@/components/ui/container";
-import getProfile from "@/actions/getProfile";
 import Button from "@/components/ui/button";
 import Link from "next/link";
 import {FaEdit} from "react-icons/fa";
@@ -8,21 +8,40 @@ import {cookies} from "next/headers";
 import {createClient} from "@/utils/supabase/server";
 import TotalPrice from "@/components/totalPrice";
 import {redirect} from "next/navigation";
+import {useEffect, useState} from "react";
+import {useSupabaseClient} from "@supabase/auth-helpers-react";
+import {toast} from "react-hot-toast";
+import { motion } from "framer-motion";
+import Summary from "@/app/(routes)/cart/components/summary";
 interface CheckoutPageProps {
     params: {
         ProfileId: string
     }
 }
 
-const  CheckoutPage: NextPage<CheckoutPageProps> = async ({params}) => {
-    const profileData = await getProfile(params.ProfileId)
-
+const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
+    const supabaseClient = useSupabaseClient();
+    const [profileData,setProfileData] = useState({
+        first_name: '',
+        last_name: '',
+        patronymic: '',
+        address: '',
+    })
+    useEffect( () => {
+        supabaseClient
+            .from('profiles')
+            .select('*')
+            .then((res)=>{
+                setProfileData(res.data![0])
+            })
+    }, []);
+    const toProfile = async () => {
+        const profileId = await supabaseClient.auth.getUser()
+        return redirect(`/profile/${profileId.data.user?.id}`)
+    }
     const doCheckout = async () => {
-        'use server'
-        const cookieStore = cookies()
-        const supabase = createClient(cookieStore)
-        const userId = await supabase.auth.getUser()
-        const { data, error } = await supabase
+        const userId = await supabaseClient.auth.getUser()
+        const { data, error } = await supabaseClient
             .from('orders')
             .insert([{
                 userID: userId.data.user?.id,
@@ -33,34 +52,50 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = async ({params}) => {
             }])
             .select()
             if (error){
-                console.log(error)
+                toast.error('Ошибка')
+            } else {
+                toast.success('Заказ произведен')
+                redirect(`/`)
             }
-            redirect(`/`)
     }
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
-    const profileEditId = await supabase.auth.getUser()
     return (
         <Container className={`py-10`}>
             <h1 className={`text-3xl font-bold w-[90vw] max-w-full`}>Заказ</h1>
             <form action={doCheckout}>
                 <div className={`flex flex-col gap-2 text-xl `}>
-                    <div className={`flex flex-col gap-2 text-xl py-10`}>
-                        <div className={`font-bold text-xl`}>Получатель</div>
-                        <div><span>Имя: </span>{profileData.first_name}</div>
-                        <div><span>Фамилия: </span>{profileData.last_name}</div>
-                        <div><span>Отчество: </span>{profileData.patronymic}</div>
-                        <div><span>Адрес: </span>{profileData.address}</div>
-                        <Link href={`/profileEdit/${profileEditId.data.user?.id}`} className={`w-fit`}>
-                            <Button className={`flex justify-center items-center gap-2 text-sm`}>
+                    <motion.div className={`flex flex-col gap-2 text-xl py-10`}
+                                initial={{ opacity: 0, x: -30 }}
+                                whileInView={{ opacity: 1, x: 0, }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    type: "spring",
+                                    duration: 2
+                                }}>
+
+                            <div className={`font-bold text-xl mb-2`}>Получатель</div>
+                            <div><span>Имя: </span>{profileData.first_name}</div>
+                            <div><span>Фамилия: </span>{profileData.last_name}</div>
+                            <div><span>Отчество: </span>{profileData.patronymic}</div>
+                            <div><span>Адрес: </span>{profileData.address}</div>
+
+                            <Button onClick={toProfile} className={`flex justify-center items-center gap-2 text-sm w-fit mt-3`}>
                                 Редактировать
                                 <FaEdit className={`text-xl text-white hover:cursor-pointer`}/>
                             </Button>
-                        </Link>
+                    </motion.div>
+                    <motion.div
+                        className={`flex flex-col gap-2`}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0, }}
+                        viewport={{ once: true }}
+                        transition={{
+                            type: "spring",
+                            duration: 2
+                        }}>
                         <div className={`font-bold text-xl mt-10`}>Заказ:</div>
                         <TotalPrice/>
-                    </div>
-                    <Button className={`text-sm `}>Заказать</Button>
+                        <Button className={`text-sm w-full`}>Заказать</Button>
+                    </motion.div>
                 </div>
             </form>
         </Container>

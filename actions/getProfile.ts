@@ -1,10 +1,8 @@
-import {cookies} from "next/headers";
-import {createClient} from "@/utils/supabase/server";
-const getProfile = async (userId: string) => {
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+import {useSupabaseClient} from "@supabase/auth-helpers-react";
+const getProfile = async () => {
+    const supabaseClient = useSupabaseClient();
 
-    const { data: profile, error } = await supabase
+    const { data: profile, error } = await supabaseClient
         .from('profiles')
         .select('*')
     if (error){

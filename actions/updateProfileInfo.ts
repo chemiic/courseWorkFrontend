@@ -1,11 +1,12 @@
 import {ProfileData} from "@/types/types";
 import {cookies} from "next/headers";
 import {createClient} from "@/utils/supabase/server";
+import {useSupabaseClient} from "@supabase/auth-helpers-react";
+import {toast} from "react-hot-toast";
 const updateProfileInfo = async (profileData:ProfileData) => {
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
-    const user = await supabase.auth.getUser()
-    const { data, error } = await supabase
+    const supabaseClient = useSupabaseClient();
+    const user = await supabaseClient.auth.getUser()
+    const { data, error } = await supabaseClient
         .from('profiles')
         .update({
             first_name:  profileData.first_name,
@@ -16,7 +17,10 @@ const updateProfileInfo = async (profileData:ProfileData) => {
         .eq('id', `${user.data.user?.id}`)
 
     if (error){
-        console.log("Ошибка.")
+        toast.error("Ошибка.")
+    }else{
+
+        toast.success("Данные изменены")
     }
 };
 

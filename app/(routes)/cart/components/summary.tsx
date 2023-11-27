@@ -7,6 +7,7 @@ import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { toast } from "react-hot-toast";
 import Button from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const Summary: FC = () => {
     const searchParams = useSearchParams();
@@ -33,9 +34,15 @@ const Summary: FC = () => {
     }
 
     return (
-        <div
+        <motion.div
             className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
-        >
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0, }}
+            viewport={{ once: true }}
+            transition={{
+                type: "spring",
+                duration: 2
+            }}>
             <h2 className="text-lg font-medium text-gray-900">
                 Стоимость заказа
             </h2>
@@ -48,7 +55,7 @@ const Summary: FC = () => {
             <Button onClick={onCheckout} disabled={products.length === 0} className="w-full mt-6 font-medium ">
                 Заказать
             </Button>
-        </div>
+        </motion.div>
     );
 }
 

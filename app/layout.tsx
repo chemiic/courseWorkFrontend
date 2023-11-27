@@ -4,6 +4,7 @@ import Footer from "@/components/footer";
 import ModalProvider from "@/providers/modal-provider";
 import ToastProvider from "@/providers/toast-provider";
 import Menu from "@/components/menu/Menu";
+import SupabaseProvider from "@/providers/supabase-provider";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -24,11 +25,13 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground overflow-x-hidden">
         <main className="min-h-[100vh] flex flex-col justify-between">
-            <ModalProvider />
-            <ToastProvider />
-            <Menu />
-            {children}
-            <Footer />
+            <SupabaseProvider>
+                <ModalProvider />
+                <ToastProvider />
+                <Menu />
+                {children}
+                <Footer />
+            </SupabaseProvider>
         </main>
       </body>
     </html>
