@@ -10,6 +10,10 @@ import case1_1 from '@/public/case1_1.jpg'
 import case1_2 from '@/public/case1_2.jpg'
 import case1_3 from '@/public/case1_3.jpg'
 import case1_4 from '@/public/case1_4.jpg'
+import case2_1 from '@/public/case2_1.png'
+import case2_2 from '@/public/case2_2.png'
+import case2_3 from '@/public/case2_3.png'
+import case2_4 from '@/public/case2_4.png'
 
 // import required modules
 import {EffectCards, Keyboard, Navigation, Pagination} from 'swiper/modules';
@@ -29,15 +33,15 @@ const slidesInner = [
         }
     },
     {
-        images: [case1_1, case1_2, case1_3, case1_4],
+        images: [case2_1, case2_2, case2_3, case2_4],
         text: {
-            MB: 'ASUS ROG Strix B760-i Gaming',
-            CPU: 'INTEL CORE i5-13500',
-            GPU: 'INNO3D RTX 4070ti 12Gb',
-            PSU: 'Corsair SF600 pl',
-            RAM: 'G.SKILL DDR5-6000 FlareX5 32Gb',
-            Cooler:' NOCTUA NH-L9i-17xx',
-            NVME:' M.2 Kingston NV2 1Tb',
+            MB: 'ASRock B660M-ITX/ac',
+            CPU: 'INTEL CORE i5-12400F',
+            GPU: 'PALIT StormX RTX 3060 8Gb',
+            PSU: 'FSP SFX pro 450W',
+            RAM: '2x16Gb SP DDR4 3200MHz',
+            Cooler:'intel BOX',
+            NVME:'M.2 960Gb #team MP33',
         }
     },
 ]

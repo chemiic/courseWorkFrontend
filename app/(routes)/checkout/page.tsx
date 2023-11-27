@@ -27,6 +27,8 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
         patronymic: '',
         address: '',
     })
+    const [isAuth, setIsAuth] = useState(false)
+
     useEffect( () => {
         supabaseClient
             .from('profiles')
@@ -61,16 +63,17 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
     return (
         <Container className={`py-10`}>
             <h1 className={`text-3xl font-bold w-[90vw] max-w-full`}>Заказ</h1>
-            <form action={doCheckout}>
-                <div className={`flex flex-col gap-2 text-xl `}>
-                    <motion.div className={`flex flex-col gap-2 text-xl py-10`}
-                                initial={{ opacity: 0, x: -30 }}
-                                whileInView={{ opacity: 1, x: 0, }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    type: "spring",
-                                    duration: 2
-                                }}>
+            {isAuth ?
+                <form action={doCheckout}>
+                    <div className={`flex flex-col gap-2 text-xl `}>
+                        <motion.div className={`flex flex-col gap-2 text-xl py-10`}
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0, }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        type: "spring",
+                                        duration: 2
+                                    }}>
 
                             <div className={`font-bold text-xl mb-2`}>Получатель</div>
                             <div><span>Имя: </span>{profileData.first_name}</div>
@@ -82,22 +85,29 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
                                 Редактировать
                                 <FaEdit className={`text-xl text-white hover:cursor-pointer`}/>
                             </Button>
-                    </motion.div>
-                    <motion.div
-                        className={`flex flex-col gap-2`}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0, }}
-                        viewport={{ once: true }}
-                        transition={{
-                            type: "spring",
-                            duration: 2
-                        }}>
-                        <div className={`font-bold text-xl mt-10`}>Заказ:</div>
-                        <TotalPrice/>
-                        <Button className={`text-sm w-full`}>Заказать</Button>
-                    </motion.div>
+                        </motion.div>
+                        <motion.div
+                            className={`flex flex-col gap-2`}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0, }}
+                            viewport={{ once: true }}
+                            transition={{
+                                type: "spring",
+                                duration: 2
+                            }}>
+                            <div className={`font-bold text-xl mt-10`}>Заказ:</div>
+                            <TotalPrice/>
+                            <Button className={`text-sm w-full`}>Заказать</Button>
+                        </motion.div>
+                    </div>
+                </form>
+                :
+                <div className={`flex flex-col gap-4 py-6`}>
+                    <div className={`w-full text-xl`}>Для создания заказа вы должны быть авторизованы</div>
+                    <Button className={`w-fit`}><Link href={`/login`}>Страница Авторизации</Link></Button>
                 </div>
-            </form>
+            }
+
         </Container>
     )
 }

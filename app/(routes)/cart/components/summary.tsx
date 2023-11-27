@@ -8,6 +8,7 @@ import useCart from "@/hooks/use-cart";
 import { toast } from "react-hot-toast";
 import Button from "@/components/ui/button";
 import { motion } from "framer-motion";
+import {useSupabaseClient} from "@supabase/auth-helpers-react";
 
 const Summary: FC = () => {
     const searchParams = useSearchParams();
@@ -29,8 +30,16 @@ const Summary: FC = () => {
         return total + Number(product.price)
     }, 0);
 
+    const supabaseClient = useSupabaseClient();
     const onCheckout = async () => {
-        router.push('/checkout')
+        const user = await supabaseClient.auth.getUser()
+        console.log(user)
+        if (user.data.user  ){
+            router.push('/checkout')
+        } else {
+            toast('Для создания заказа вы должны быть авторизованы')
+            router.push(`/login`)
+        }
     }
 
     return (
