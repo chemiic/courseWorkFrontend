@@ -9,7 +9,7 @@ import {createClient} from "@/utils/supabase/server";
 import TotalPrice from "@/components/totalPrice";
 import {redirect} from "next/navigation";
 import {useEffect, useState} from "react";
-import {useSupabaseClient} from "@supabase/auth-helpers-react";
+import {useSupabaseClient, useUser} from "@supabase/auth-helpers-react";
 import {toast} from "react-hot-toast";
 import { motion } from "framer-motion";
 import Summary from "@/app/(routes)/cart/components/summary";
@@ -28,7 +28,7 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
         address: '',
     })
     const [isAuth, setIsAuth] = useState(false)
-
+    const user  = useUser()
     useEffect( () => {
         supabaseClient
             .from('profiles')
@@ -36,6 +36,9 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
             .then((res)=>{
                 setProfileData(res.data![0])
             })
+        if (user){
+            setIsAuth(true)
+        }
     }, []);
     const toProfile = async () => {
         const profileId = await supabaseClient.auth.getUser()
@@ -104,7 +107,7 @@ const  CheckoutPage: NextPage<CheckoutPageProps> = ({params}) => {
                 :
                 <div className={`flex flex-col gap-4 py-6`}>
                     <div className={`w-full text-xl`}>Для создания заказа вы должны быть авторизованы</div>
-                    <Button className={`w-fit`}><Link href={`/login`}>Страница Авторизации</Link></Button>
+                    <Button className={`w-fit`}><Link href={`/login`}>Страница авторизации</Link></Button>
                 </div>
             }
 
