@@ -79,7 +79,6 @@ const Catalog: FC<CatalogProps> = ({products}) => {
             }
         } if (priceFrom !=='' && priceTo ===''){
             if (newArr.length!==0){
-                console.log(newArr)
                 newArr = newArr.flat(1).filter(item=>{
                     if(item.price > Number(priceFrom) || item.price == Number(priceFrom)){
                         return item
